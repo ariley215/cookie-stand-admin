@@ -22,12 +22,40 @@ export default function ReportTable(props) {
 
 function HeaderRow({ headers}) {
     return (
-        <thead>
+        <thead className="bg-green-500">
             <tr>
                 {headers.map((header, index) => {
+                    let className = '';
+                    if (index === 0) {
+                        className = 'pl-4';
+                    } else if (index === headers.length - 1) {
+                        className = 'pr-4';
+                    }
                     return <th key={index}>{header}</th>;
                 })}
             </tr>
         </thead>
     );
+}
+
+function ReportRow({ reports }) {
+    const cellValues = ['Totals'];
+
+    let megaTotal = 0;
+
+    for (let i in reports[0].hourly_sales) {
+
+        let hourlyTotal = 0;
+
+        for (let report of reports) {
+            hourlyTotal += report.hourly_sales[i];
+        }
+
+        cellValues.push(hourlyTotal);
+
+        megaTotal += hourlyTotal;
+    }
+
+    cellValues.push(megaTotal);
+
 }
