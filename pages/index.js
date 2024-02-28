@@ -3,23 +3,21 @@ import { useState } from 'react';
 
 
 export default function Home() {
+
   const [cookieStands, setCookieStands] = useState([]);
 
-
-  function createCookieStandHandler(event) {
-    event.preventDefault();
-    const form = new FormData(event.target);
-    const location = form.get('location');
-    const minCustomers = form.get('min customers');
-    const maxCustomers = form.get('max customers');
-    const aveCookies = form.get('ave cookies');
-    const newStand = {
-      location: location,
-      minCustomers: minCustomers,
-      maxCustomers: maxCustomers,
-      aveCookies: aveCookies,
-    };
-    setCookieStands([...cookieStands, newStand]);
+  function createCookieStandHandler(props) {
+    function handleSubmit(event) {
+      props.onCreateStand({
+        location: event.target.location.value,
+        minCustomers: parseInt(event.target.minCustomers.value),
+        maxCustomers: parseInt(event.target.maxCustomers.value),
+        aveCookies: parseInt(event.target.aveCookies.value),
+      });
+      event.target.reset();
+  }
+     
+  
 
   }
 
@@ -30,9 +28,7 @@ export default function Home() {
       </Head>
       <Header />
       <main className="flex flex-col items-center py-4 space-y-8">
-        <form>
-          <CreateCookieStandForm onSubmit={ createCookieStandHandler }/>
-        </form>
+        <CreateCookieStandForm onSubmit={createCookieStandHandler} />
         <Response />
       </main>
       <footer><Footer /></footer>
@@ -40,36 +36,48 @@ export default function Home() {
   );
 };
 
-function Header(){
+function Header() {
 
-    return(
-        <header className="bg-green-500 p-8 mb-8">
-            <h1 className="text-6xl">Cookie Stand Admin</h1>
-        </header>
-    )
+  return (
+    <header className="bg-green-500 p-8 mb-8">
+      <h1 className="text-6xl">Cookie Stand Admin</h1>
+    </header>
+  )
 };
 
-function CreateCookieStandForm( {onSubmit} ) {
-    return(
-      <form onSubmit={onSubmit} className=" justify-center w-3/4 p-8 mx-auto my-4 bg-green-300 rounded-lg">
-        <h2 className="text-4xl flex justify-center items-center p-6">Create Cookie Stand</h2>
+function CreateCookieStandForm({ onSubmit }) {
+  return (
+    <form onSubmit={onSubmit} className=" flex flex-col w-3/4 gap-2 p-8 mx-auto my-4 bg-green-300 rounded-lg">
+      <legend className="text-4xl justify-center text-center p-6">Create Cookie Stand</legend>
 
+      <div className='flex py-4'>
         <label className="text-2xl">Location</label>
-        <input name="location" className=" w-5/6" />
-        <br />
+        <input name="location" type="text" className=" flex-auto pl-2" />
+      </div>
 
-        <label className="text-2xl">Minimum Customers per Hour</label>
-        <input name="min customers" className="" />
+      <div className='flex gap-2 text-center '>
 
-        <label className="text-2xl">Maximum Customers per Hour</label>
-        <input name="max customers" className="" />
+        <div className='flex flex-col flex-1 min-w-0 p-2'>
+          <label className="text-2xl">Minimum Customers per Hour</label>
+          <input name="min customers" type="number" className="flex flex-col flex-1 gap-2 min-w-0 p-2" />
+        </div>
 
-        <label className="text-2xl">Average Cookies per Sale</label>
-        <input name="ave cookies" className="" />
+        <div className='flex flex-col flex-1 min-w-0 p-2'>
+          <label className="text-2xl">Maximum Customers per Hour</label>
+          <input name="max customers" type="number" className="" />
+        </div>
 
-        <button className="bg-green-500 hover:bg-green-650 transition-colors text-3xl py-10 px-12">Create</button>
-      </form>
-     )
+        <div className='flex flex-col flex-1 min-w-0 p-2'>
+          <label className="text-2xl">Average Cookies per Sale</label>
+          <input name="ave cookies" type="number" className="" />
+        </div>
+        
+        <button type="submit" className="bg-green-500 hover:bg-green-650 transition-colors text-3xl py-10 px-12">Create</button>
+
+      </div>
+
+    </form>
+  )
 };
 
 function Footer() {
@@ -79,11 +87,11 @@ function Footer() {
     </footer>
   );
 };
-    
+
 
 function Response(props) {
 
-    return(
-      <p>{props.response}</p>
-    )
+  return (
+    <p>{props.response}</p>
+  )
 };

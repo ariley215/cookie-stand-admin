@@ -6,6 +6,8 @@ Author: Andrea Riley(Thiel)
 
 ## Feature Tasks
 
+*completed 02-28-2024 4:45PM EST*
+
 The spec for lab is screen shot of Cookie Stand Admin Version 1
 pages/Index.js should…
 
