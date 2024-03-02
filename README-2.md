@@ -6,6 +6,8 @@ Author: Andrea Riley(Thiel)
 
 ## Feature Tasks
 
+*completed 03-02-2024 5:30PMEST*
+
 The specs for lab are screen shots Cookie Stand Admin Version 2 and Cookie Stand Admin No Stands
 
 pages/Index.js should return top level component <CookieStandAdmin>
