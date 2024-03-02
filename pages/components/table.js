@@ -1,9 +1,13 @@
 
 export default function ReportTable(props) {
-    if (props.reports.length === 0) {
-        return <p>No Cookie Stands Available</p>
-    }
 
+    if (props.reports.length === 0) {
+        return <h2>No Cookie Stands Available</h2>
+    }
+    if (!Array.isArray(props.reports)) {
+        console.error('props.reports is not an array');
+        return null; // or return some default JSX
+    }
     const headers = ['Location', ...props.hours, 'Totals'];
 
     return (
@@ -20,7 +24,7 @@ export default function ReportTable(props) {
     );
 }
 
-function HeaderRow({ headers}) {
+function HeaderRow({ headers }) {
     return (
         <thead className="bg-green-500">
             <tr>
@@ -38,7 +42,18 @@ function HeaderRow({ headers}) {
     );
 }
 
-function ReportRow({ reports }) {
+function ReportRow({ report }) {
+    const total = report.hourly_sales.reduce((sum, value) => sum + value, 0);
+    const cellValues = [report.location, ...report.hourly_sales, total];
+
+    return (
+        <tr>
+            {cellValues.map((cell, index) => <td key={index}>{cell}</td>)};
+        </tr>
+    );
+}
+
+function FooterRow({ reports }) {
     const cellValues = ['Totals'];
 
     let megaTotal = 0;
@@ -58,4 +73,19 @@ function ReportRow({ reports }) {
 
     cellValues.push(megaTotal);
 
+    return (
+        <tfoot>
+            <tr>
+                {cellValues.map((cell, index) => {
+                    let className = '';
+                    if (index === 0) {
+                        className = 'pl-4';
+                    } else if (index === cellValues.length - 1) {
+                        className = 'pr-4';
+                    }
+                    return <td key={index}>{cell}</td>;
+                })}
+            </tr>
+        </tfoot>
+    );
 }

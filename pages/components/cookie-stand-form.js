@@ -3,11 +3,12 @@ export default function CreateCookieStandForm(props) {
 
     function onSubmit(event) {
         event.preventDefault();
-        props.onCreateStand({
+        props.onCreate({
             location: event.target.location.value,
             minCustomers: parseInt(event.target.minCustomers.value),
             maxCustomers: parseInt(event.target.maxCustomers.value),
             aveCookies: parseInt(event.target.aveCookies.value),
+            hourly_sales: [48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36],            
         });
         event.target.reset();
     }
@@ -27,17 +28,17 @@ return (
 
             <div className='flex flex-col flex-1 min-w-0 p-2'>
                 <label className="text-2xl">Minimum Customers per Hour</label>
-                <input name="min customers" type="number" className="flex flex-col flex-1 gap-2 min-w-0 p-2" />
+                <input name="minCustomers" type="number" className="flex flex-col flex-1 gap-2 min-w-0 p-2" />
             </div>
 
             <div className='flex flex-col flex-1 min-w-0 p-2'>
                 <label className="text-2xl">Maximum Customers per Hour</label>
-                <input name="max customers" type="number" className="" />
+                <input name="maxCustomers" type="number" className="" />
             </div>
 
             <div className='flex flex-col flex-1 min-w-0 p-2'>
                 <label className="text-2xl">Average Cookies per Sale</label>
-                <input name="ave cookies" type="number" className="" />
+                <input name="aveCookies" type="number" className="" />
             </div>
 
             <button type="submit" className="bg-green-500 hover:bg-green-650 transition-colors text-3xl py-10 px-12">Create</button>
