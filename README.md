@@ -1,6 +1,6 @@
 # LAB - Class 37
 
-Project: Leveling up Front End with React, Next.js & TailwindCSS
+Project: Cookie Stand Admin
 
 Author: Andrea Riley(Thiel)
 
@@ -11,15 +11,19 @@ Author: Andrea Riley(Thiel)
 The spec for lab is screen shot of Cookie Stand Admin Version 1
 pages/Index.js should…
 
-- Have <Head> component with page title set to Cookie Stand Admin
-- Have a <header> component that matches spec.
-- Have a <main> component containing <form> and a placeholder component showing JSON string of last created Cookie Stand.
-- Have a <footer> component that matches spec.
+- Have `<Head>`component with page title set to Cookie Stand Admin
+- Have a `<header>` component that matches spec.
+- Have a `<main>` component containing `<form>` and a placeholder component showing JSON string of last created Cookie Stand.
+- Have a `<footer>` component that matches spec.
 - Style app using TailwindCSS utility classes.
 
 ## Getting Started
 
-First, run the development server:
+First, get dependencies:
+
+    npm install
+
+Then, start the server:
 
 ```bash
 npm run dev
